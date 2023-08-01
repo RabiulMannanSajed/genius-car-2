@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+
 const Register = () => {
-    // const 
+    const [] = useState('');
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+
     const navigate = useNavigate()
 
     const navigateLogin = event => {
@@ -10,8 +20,14 @@ const Register = () => {
     }
     const handleRegister = event => {
         event.preventDefault();
+        const name = event.target.name.value; // take the value from form
         const email = event.target.email.value; // take the value from form
-        console.log(email);
+        const password = event.target.password.value; // take the value from form
+
+        createUserWithEmailAndPassword(email, password);
+    }
+    if (user) {
+        navigate('/home');
     }
     return (
         <div className='register-form '>
