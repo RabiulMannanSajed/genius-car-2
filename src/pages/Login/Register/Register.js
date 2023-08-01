@@ -10,7 +10,7 @@ const Register = () => {
     }
     const handleRegister = event => {
         event.preventDefault();
-        const email = event.target.email.value;
+        const email = event.target.email.value; // take the value from form
         console.log(email);
     }
     return (
